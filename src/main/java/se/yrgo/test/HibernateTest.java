@@ -38,6 +38,11 @@ public class HibernateTest
 			System.out.println("Student: " + obj[0] + ", Tutor: " + obj[1]);
 		}
 
+		// Uppgift 3
+		Query query3 = em.createQuery("SELECT avg(numberOfSemesters) FROM Subject");
+		Double averageNumberOfSemesters = (Double) query3.getSingleResult();
+		System.out.println("\nPart 3\nAverage number of semesters: " + averageNumberOfSemesters);
+
 
 		tx.commit();
 		em.close();
