@@ -32,9 +32,9 @@ public class HibernateTest
 
 		// Uppgift 2
 		Query query2 = em.createQuery("SELECT s.name, t.name FROM Tutor t JOIN t.teachingGroup s");
-		List<Object[]> resultList = query2.getResultList();
+		List<Object[]> studentsAndTutors = query2.getResultList();
 		System.out.println("\nPart 2");
-		for (Object[] obj : resultList) {
+		for (Object[] obj : studentsAndTutors) {
 			System.out.println("Student: " + obj[0] + ", Tutor: " + obj[1]);
 		}
 
@@ -47,6 +47,15 @@ public class HibernateTest
 		Query query4 = em.createQuery("SELECT max(salary) FROM Tutor");
 		int maxSalary = (int) query4.getSingleResult();
 		System.out.println("\nPart 4\nHighest salary among tutors: " + maxSalary);
+
+		// Uppgift 5
+		List<Tutor> tutorsWithHighSalary = em.createNamedQuery("tutorsWithSalaryAbove", Tutor.class)
+						.setParameter("above", 10000)
+						.getResultList();
+		System.out.println("\nPart 5\nTutors with salary above 10000:");
+		for (Tutor t : tutorsWithHighSalary) {
+			System.out.println(t);
+		}
 
 		tx.commit();
 		em.close();
