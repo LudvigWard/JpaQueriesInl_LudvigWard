@@ -43,6 +43,10 @@ public class HibernateTest
 		Double averageNumberOfSemesters = (Double) query3.getSingleResult();
 		System.out.println("\nPart 3\nAverage number of semesters: " + averageNumberOfSemesters);
 
+		// Uppgift 4
+		Query query4 = em.createQuery("SELECT max(salary) FROM Tutor");
+		int maxSalary = (int) query4.getSingleResult();
+		System.out.println("\nPart 4\nHighest salary among tutors: " + maxSalary);
 
 		tx.commit();
 		em.close();
