@@ -25,9 +25,19 @@ public class HibernateTest
 					String.class);
 		query1.setParameter("subject", science);
 		List<String> studentNames = query1.getResultList();
+		System.out.println("Part 1\nNames of students with a Tutor who can teach science:");
 		for (String name : studentNames) {
 			System.out.println(name);
 		}
+
+		// Uppgift 2
+		Query query2 = em.createQuery("SELECT s.name, t.name FROM Tutor t JOIN t.teachingGroup s");
+		List<Object[]> resultList = query2.getResultList();
+		System.out.println("\nPart 2");
+		for (Object[] obj : resultList) {
+			System.out.println("Student: " + obj[0] + ", Tutor: " + obj[1]);
+		}
+
 
 		tx.commit();
 		em.close();
